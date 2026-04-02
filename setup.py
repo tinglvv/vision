@@ -129,6 +129,8 @@ def get_macros_and_flags():
         define_macros += [("torchvision_EXPORTS", None)]
         extra_compile_args["cxx"].append("/MP")
         extra_compile_args["cxx"].append("/Zc:preprocessor")
+        if "nvcc" in extra_compile_args:
+            extra_compile_args["nvcc"].append("-DCCCL_IGNORE_MSVC_TRADITIONAL_PREPROCESSOR_WARNING")
         if sysconfig.get_config_var("Py_GIL_DISABLED"):
             extra_compile_args["cxx"].append("-DPy_GIL_DISABLED")
 
